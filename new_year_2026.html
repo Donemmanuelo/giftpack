@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy New Year 2026</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 3s infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        .container {
+            position: relative;
+            z-index: 10;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .year-display {
+            font-size: 120px;
+            font-weight: bold;
+            background: linear-gradient(45deg, #ffd700, #ffed4e, #ffd700);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+            text-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+            animation: glow 2s ease-in-out infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% { filter: brightness(1); }
+            50% { filter: brightness(1.3); }
+        }
+
+        .countdown-container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            margin: 30px 0;
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        .countdown-title {
+            color: #ffd700;
+            font-size: 24px;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .time-unit {
+            background: rgba(255, 215, 0, 0.2);
+            padding: 20px;
+            border-radius: 15px;
+            min-width: 100px;
+            border: 2px solid rgba(255, 215, 0, 0.5);
+        }
+
+        .time-number {
+            font-size: 48px;
+            font-weight: bold;
+            color: #ffd700;
+            display: block;
+        }
+
+        .time-label {
+            font-size: 14px;
+            color: #ffffff;
+            text-transform: uppercase;
+            margin-top: 5px;
+        }
+
+        .message-section {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            margin: 30px 0;
+            border: 2px solid rgba(255, 215, 0, 0.3);
+        }
+
+        .language-toggle {
+            margin-bottom: 30px;
+        }
+
+        .lang-btn {
+            background: rgba(255, 215, 0, 0.3);
+            border: 2px solid #ffd700;
+            color: white;
+            padding: 10px 30px;
+            margin: 0 10px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+
+        .lang-btn.active {
+            background: #ffd700;
+            color: #1a1a2e;
+            font-weight: bold;
+        }
+
+        .message-content {
+            color: white;
+            font-size: 20px;
+            line-height: 1.8;
+        }
+
+        .message-content h2 {
+            color: #ffd700;
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        .blessing {
+            margin: 15px 0;
+            font-size: 22px;
+        }
+
+        .cross {
+            color: #ffd700;
+            font-size: 40px;
+            margin: 20px 0;
+        }
+
+        .firework {
+            position: fixed;
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        .gift {
+            position: fixed;
+            pointer-events: none;
+            font-size: 40px;
+            z-index: 999;
+            animation: fall 3s linear;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(-100px) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .celebration-message {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(255, 215, 0, 0.95);
+            color: #1a1a2e;
+            padding: 50px;
+            border-radius: 30px;
+            font-size: 48px;
+            font-weight: bold;
+            z-index: 2000;
+            animation: celebrate 2s ease-in-out;
+        }
+
+        @keyframes celebrate {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); }
+            50% { transform: translate(-50%, -50%) scale(1.2); }
+        }
+
+        @media (max-width: 768px) {
+            .year-display { font-size: 80px; }
+            .time-number { font-size: 36px; }
+            .message-content { font-size: 18px; }
+            .message-content h2 { font-size: 28px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="stars" id="stars"></div>
+    
+    <div class="container">
+        <div class="year-display">2026</div>
+        
+        <div class="countdown-container">
+            <div class="countdown-title">Countdown to New Year</div>
+            <div class="countdown">
+                <div class="time-unit">
+                    <span class="time-number" id="days">00</span>
+                    <span class="time-label">Days</span>
+                </div>
+                <div class="time-unit">
+                    <span class="time-number" id="hours">00</span>
+                    <span class="time-label">Hours</span>
+                </div>
+                <div class="time-unit">
+                    <span class="time-number" id="minutes">00</span>
+                    <span class="time-label">Minutes</span>
+                </div>
+                <div class="time-unit">
+                    <span class="time-number" id="seconds">00</span>
+                    <span class="time-label">Seconds</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="message-section">
+            <div class="language-toggle">
+                <button class="lang-btn active" onclick="showLanguage('en')">English</button>
+                <button class="lang-btn" onclick="showLanguage('fr')">Français</button>
+            </div>
+
+            <div class="message-content" id="message-en">
+                <h2>🎊 Happy New Year 2026! 🎊</h2>
+                <p class="blessing">May 2026 be a year of <strong>SUCCESS</strong></p>
+                <p class="blessing">A year filled with <strong>PEACE</strong></p>
+                <p class="blessing">A year overflowing with <strong>JOY</strong></p>
+                <div class="cross">✝</div>
+                <p class="blessing">And above all, a year when you <strong>SURRENDER YOUR LIFE TO CHRIST</strong></p>
+                <p style="margin-top: 30px; font-style: italic;">May God's grace and blessings be upon you and your loved ones!</p>
+            </div>
+
+            <div class="message-content" id="message-fr" style="display: none;">
+                <h2>🎊 Bonne Année 2026! 🎊</h2>
+                <p class="blessing">Que 2026 soit une année de <strong>SUCCÈS</strong></p>
+                <p class="blessing">Une année remplie de <strong>PAIX</strong></p>
+                <p class="blessing">Une année débordante de <strong>JOIE</strong></p>
+                <div class="cross">✝</div>
+                <p class="blessing">Et surtout, une année où vous <strong>ABANDONNEZ VOTRE VIE AU CHRIST</strong></p>
+                <p style="margin-top: 30px; font-style: italic;">Que la grâce et les bénédictions de Dieu soient sur vous et vos proches!</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="celebration-message" id="celebration">
+        🎉 HAPPY NEW YEAR 2026! 🎉
+    </div>
+
+    <script>
+        // Create stars
+        const starsContainer = document.getElementById('stars');
+        for (let i = 0; i < 100; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.width = Math.random() * 3 + 'px';
+            star.style.height = star.style.width;
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 100 + '%';
+            star.style.animationDelay = Math.random() * 3 + 's';
+            starsContainer.appendChild(star);
+        }
+
+        // Language toggle
+        function showLanguage(lang) {
+            document.getElementById('message-en').style.display = lang === 'en' ? 'block' : 'none';
+            document.getElementById('message-fr').style.display = lang === 'fr' ? 'block' : 'none';
+            
+            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+        }
+
+        // Countdown
+        function updateCountdown() {
+            const newYear = new Date('2026-01-01T00:00:00').getTime();
+            const now = new Date().getTime();
+            const distance = newYear - now;
+
+            if (distance < 0) {
+                launchCelebration();
+                document.querySelector('.countdown-title').textContent = '🎉 HAPPY NEW YEAR 2026! 🎉';
+                document.getElementById('days').textContent = '00';
+                document.getElementById('hours').textContent = '00';
+                document.getElementById('minutes').textContent = '00';
+                document.getElementById('seconds').textContent = '00';
+                return;
+            }
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById('days').textContent = String(days).padStart(2, '0');
+            document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+            document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+            document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+        }
+
+        // Create firework effect
+        function createFirework(x, y) {
+            const colors = ['#ffd700', '#ff6b6b', '#4ecdc4', '#45b7d1', '#f9ca24', '#ff6348'];
+            const particles = 30;
+            
+            for (let i = 0; i < particles; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'firework';
+                particle.style.left = x + 'px';
+                particle.style.top = y + 'px';
+                particle.style.width = '8px';
+                particle.style.height = '8px';
+                particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+                particle.style.borderRadius = '50%';
+                particle.style.boxShadow = `0 0 10px ${colors[Math.floor(Math.random() * colors.length)]}`;
+                
+                const angle = (Math.PI * 2 * i) / particles;
+                const velocity = 100 + Math.random() * 100;
+                const vx = Math.cos(angle) * velocity;
+                const vy = Math.sin(angle) * velocity;
+                
+                document.body.appendChild(particle);
+                
+                let posX = 0, posY = 0;
+                let frame = 0;
+                const animate = () => {
+                    frame++;
+                    posX += vx / 30;
+                    posY += vy / 30 + frame / 2;
+                    particle.style.transform = `translate(${posX}px, ${posY}px)`;
+                    particle.style.opacity = 1 - frame / 60;
+                    
+                    if (frame < 60) {
+                        requestAnimationFrame(animate);
+                    } else {
+                        particle.remove();
+                    }
+                };
+                animate();
+            }
+        }
+
+        // Create gift
+        function createGift() {
+            const gift = document.createElement('div');
+            gift.className = 'gift';
+            gift.textContent = '🎁';
+            gift.style.left = Math.random() * window.innerWidth + 'px';
+            gift.style.top = '-50px';
+            document.body.appendChild(gift);
+            
+            setTimeout(() => gift.remove(), 3000);
+        }
+
+        // Launch celebration
+        let celebrationLaunched = false;
+        function launchCelebration() {
+            if (celebrationLaunched) return;
+            celebrationLaunched = true;
+            
+            document.getElementById('celebration').style.display = 'block';
+            setTimeout(() => {
+                document.getElementById('celebration').style.display = 'none';
+            }, 3000);
+            
+            // Launch fireworks and gifts
+            let count = 0;
+            const interval = setInterval(() => {
+                const x = Math.random() * window.innerWidth;
+                const y = Math.random() * window.innerHeight * 0.6;
+                createFirework(x, y);
+                
+                if (count % 2 === 0) {
+                    createGift();
+                }
+                
+                count++;
+                if (count >= 50) {
+                    clearInterval(interval);
+                }
+            }, 200);
+        }
+
+        // Update countdown every second
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+
+        // Random fireworks before midnight
+        setInterval(() => {
+            if (!celebrationLaunched && Math.random() > 0.7) {
+                const x = Math.random() * window.innerWidth;
+                const y = Math.random() * window.innerHeight * 0.5;
+                createFirework(x, y);
+            }
+        }, 3000);
+    </script>
+</body>
+</html>
