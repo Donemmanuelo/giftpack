@@ -1,2 +1,2 @@
 # giftpack
-html page fir wishing happy new year.
+html page for wishing happy new year.
